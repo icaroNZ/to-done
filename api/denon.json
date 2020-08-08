@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "start": "deno run -A --allow-env --allow-net --allow-write --allow-read --allow-plugin --unstable src/main.ts",
+    "watch": "true"
+  }
+}
