@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import 'uikit/dist/css/uikit.min.css';
+import UIKit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
+
+UIKit.use(Icons);
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

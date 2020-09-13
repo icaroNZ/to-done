@@ -8,9 +8,10 @@ import {
   notNull,
 } from '../../deps.ts';
 
-import { optionalLengthBetween } from './Rules/OptionalLengthBetween.ts';
+import { optionalStringLength } from './Rules/optionalStringLength.ts';
 
 export interface ITodo {
+  _id: { $oid: string };
   name: string;
   title: string;
   description?: string;
@@ -44,8 +45,8 @@ export interface ITodoUpdate {
 }
 
 export const todoSchemaUpdate = {
-  name: [notNull, optionalLengthBetween(5, 100)],
-  title: [notNull, optionalLengthBetween(5, 100)],
+  name: [notNull, optionalStringLength(5, 100)],
+  title: [notNull, optionalStringLength(5, 100)],
   description: [isString, nullable],
   done: [notNull, isBool],
   color: [isString, nullable],

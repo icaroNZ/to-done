@@ -1,7 +1,12 @@
-import todoRouter from './todoRoute.ts';
+import todoRouter from "./todoRoute.ts";
+import todoOrderRouter from "./todoOrderRouter.ts";
+import { Application } from "../../deps.ts";
 
-const initRouters = (app: any) => {
-  app.use(todoRouter.routes());
+const apiVersion = Deno.env.get("API_VERSION");
+const apiUrl = `/api/${apiVersion}`;
+const initRouters = (app: Application) => {
+  app.use(todoRouter(apiUrl).routes());
+  app.use(todoOrderRouter(apiUrl).routes());
 };
 
 export default initRouters;

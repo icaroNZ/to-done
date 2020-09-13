@@ -1,10 +1,17 @@
-export { Application, Router } from 'https://deno.land/x/oak/mod.ts';
+export {
+  Application,
+  Router,
+  RouterContext,
+  Response,
+  Status,
+  RouterOptions,
+} from "https://deno.land/x/oak/mod.ts";
 export {
   MongoClient,
   ObjectId,
   UpdateResult,
   WithID,
-} from 'https://deno.land/x/mongo@v0.9.2/mod.ts';
+} from "https://deno.land/x/mongo@v0.9.2/mod.ts";
 export {
   validate,
   required,
@@ -20,4 +27,6 @@ export {
   invalid,
   Rule,
   notNull,
-} from 'https://deno.land/x/validasaur/mod.ts';
+} from "https://deno.land/x/validasaur/mod.ts";
+
+export { oakCors } from "https://deno.land/x/cors/mod.ts";

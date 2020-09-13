@@ -1,3 +1,4 @@
+import { RouterContext } from '../../deps.ts';
 import { validateRequest, validateMongoId } from '../utils/validation.ts';
 import {
   ITodo,
@@ -5,12 +6,11 @@ import {
   todoSchemaUpdate,
   todoSchema,
 } from '../model/todoModel.ts';
-
 import { MongoDatabaseRepository } from '../repository/MongoDatabaseRepository.ts';
 
 const mongoDb = new MongoDatabaseRepository();
 
-export const getAll = async (context: any) => {
+export const getAll = async (context: RouterContext) => {
   console.log('Getting all todos');
   try {
     const response = await mongoDb.findMany();
@@ -19,7 +19,7 @@ export const getAll = async (context: any) => {
       length: response.length,
       data: response,
     };
-    context.response.body = JSON.stringify(result);
+    context.response.body = result;
   } catch (error) {
     const result = {
       success: false,
@@ -29,8 +29,8 @@ export const getAll = async (context: any) => {
   }
 };
 
-export const get = async (context: any) => {
-  const id = context.params.id;
+export const get = async (context: RouterContext) => {
+  const id = context.params.id!;
   console.log(`Getting todo ${id}`);
   let result;
   try {
@@ -54,10 +54,10 @@ export const get = async (context: any) => {
       context.response.status = 500;
     }
   }
-  context.response.body = JSON.stringify(result);
+  context.response.body = result;
 };
 
-export const post = async (context: any) => {
+export const post = async (context: RouterContext) => {
   console.log('Adding a todo');
   const body = context.request.body();
   const data = <ITodo>await body.value;
@@ -65,6 +65,7 @@ export const post = async (context: any) => {
   try {
     await validateRequest(data, todoSchema);
     const reqResponse = await mongoDb.insertOne(data);
+    data['_id'] = reqResponse;
     response = {
       success: true,
       data,
@@ -75,11 +76,11 @@ export const post = async (context: any) => {
       error,
     };
   }
-  context.response.body = JSON.stringify(response);
+  context.response.body = response;
 };
 
-export const remove = async (context: any) => {
-  const id = context.params.id;
+export const remove = async (context: RouterContext) => {
+  const id = context.params.id!;
   console.log(`Removing todo ${id}`);
   let result;
   try {
@@ -103,10 +104,10 @@ export const remove = async (context: any) => {
       context.response.status = 500;
     }
   }
-  context.response.body = JSON.stringify(result);
+  context.response.body = result;
 };
-export const update = async (context: any) => {
-  const id = context.params.id;
+export const update = async (context: RouterContext) => {
+  const id = context.params.id!;
   console.log(`Updating todo ${id}`);
   let result;
   try {
@@ -130,5 +131,5 @@ export const update = async (context: any) => {
     };
     context.response.status = 500;
   }
-  context.response.body = JSON.stringify(result);
+  context.response.body = result;
 };
