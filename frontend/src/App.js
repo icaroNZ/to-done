@@ -22,7 +22,7 @@ function App() {
   useLocalStorage(state.todos, 'todos', dispatchTo);
 
   const requestOrderTodo = useCallback(async () => {
-    const { data } = await axios.get('http://localhost:3001/api/v1/order-todo');
+    const { data } = await axios.get('http://localhost:8080/api/v1/order-todo');
     let values = [];
     const dataArray = data.data.data;
     for (let groupIndex = 1; groupIndex < data.numberOfGroups; groupIndex++) {

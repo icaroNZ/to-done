@@ -29,4 +29,4 @@ export {
   notNull,
 } from "https://deno.land/x/validasaur/mod.ts";
 
-export { oakCors } from "https://deno.land/x/cors/mod.ts";
+//export { oakCors } from "https://deno.land/x/cors/mod.ts";

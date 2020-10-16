@@ -11,7 +11,7 @@ function httpDispatchMiddleware(aDispatch) {
         newTodo.title += ' - duplicate';
         delete newTodo._id;
         axios
-          .post('http://localhost:3001/api/v1/todo', newTodo)
+          .post('http://localhost:8080/api/v1/todo', newTodo)
           .then(({ data: { data } }) => {
             action.payload['newTodo'] = data;
             return aDispatch(action);

@@ -1,4 +1,4 @@
-import { Application, oakCors } from "../deps.ts";
+import { Application /*, oakCors */ } from "../deps.ts";
 import initRouters from "./routers/index.ts";
 import notFound from "./middlewares/notFound.ts";
 import startListeningForTerminationSignal from "./utils/SignalManager.ts";
@@ -13,9 +13,9 @@ const PORT = +(Deno.env.get("PORT") || 3001);
 const app = new Application();
 
 //app.use(setContentType);
-const allowedOrigins = oakCors({ origin: "http://localhost:3000" });
+//const allowedOrigins = oakCors({ origin: "http://localhost:3000" });
 
-app.use(allowedOrigins);
+//app.use(allowedOrigins);
 
 initRouters(app);
 
